@@ -1,0 +1,34 @@
+Package: ChIPKernels
+Type: Package
+Title: String kernels for ChIP-Seq
+Version: 1.0
+Date: 2013-06-21
+Author: Manu Setty
+Maintainer: Manu Setty <manu@cbio.mskcc.org>
+Depends:
+    Biostrings,
+    BSgenome,
+    gtools,
+    GenomicRanges,
+    sfsmisc,
+    parallel,
+    kernlab
+Imports:
+    graphics,
+    methods,
+    stats,
+    utils,
+    BiocGenerics,
+    IRanges,
+    Biostrings
+Description: Collection of methods for building different string kernels used
+    for ChIP-Seq
+License: GPL (>= 2)
+LazyLoad: yes
+Collate:
+    'ChIPKernels-internal.R'
+    'positional_wildcard_dictionary.R'
+    'misc.R'
+    'build_features_kernel.R'
+    'chipkernels_utils.R'
+    'mismatch_dictionary.R'
