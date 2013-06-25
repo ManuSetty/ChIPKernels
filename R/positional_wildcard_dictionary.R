@@ -9,7 +9,7 @@
 #' @param mismatches Number of mismatches
 #' @param out.dir Directory to write the diciontary in
 #' @param alphabet Nucleotide alphabet. By defualt using all single/double nucleotide combinations and N
-#' Note that the first four alphabets have to be \code {c('A', 'C', 'G', 'T')}
+#' Note that the first four alphabets have to be \code{c('A', 'C', 'G', 'T')}
 #' @param consecutive.mismatches Logical indicating whether only consecutive mismatches should be allowed
 #' @param no.cores Number of cores of parallel processing
 #' @description This build a matrix of distances between all kmers and unique kmers,

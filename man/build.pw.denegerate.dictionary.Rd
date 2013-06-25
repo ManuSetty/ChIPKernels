@@ -16,7 +16,7 @@
 
   \item{alphabet}{Nucleotide alphabet. By defualt using all
   single/double nucleotide combinations and N Note that the
-  first four alphabets have to be \code {c('A', 'C', 'G',
+  first four alphabets have to be \code{c('A', 'C', 'G',
   'T')}}
 
   \item{consecutive.mismatches}{Logical indicating whether

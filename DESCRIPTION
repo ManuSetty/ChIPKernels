@@ -21,6 +21,7 @@ Imports:
     BiocGenerics,
     IRanges,
     Biostrings
+LinkingTo: IRanges, Biostrings
 Description: Collection of methods for building different string kernels used
     for ChIP-Seq
 License: GPL (>= 2)
