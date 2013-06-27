@@ -12,7 +12,8 @@ Depends:
     GenomicRanges,
     sfsmisc,
     parallel,
-    kernlab
+    kernlab,
+    Matrix
 Imports:
     graphics,
     methods,
