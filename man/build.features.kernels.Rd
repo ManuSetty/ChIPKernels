@@ -1,8 +1,8 @@
-\name{build.mismatch.kernel}
-\alias{build.mismatch.kernel}
+\name{build.features.kernels}
+\alias{build.features.kernels}
 \title{Build features and kernels}
 \usage{
-  build.mismatch.kernel(dictionary.file, seqs,
+  build.features.kernels(dictionary.file, seqs,
     kmers = NULL, kernel = TRUE)
 }
 \arguments{

@@ -1,5 +1,5 @@
+export(build.features.kernels)
 export(build.mismatch.dictionary)
-export(build.mismatch.kernel)
 export(build.pw.denegerate.dictionary)
 export(determine.kmers)
 export(dinuc.alphabet)

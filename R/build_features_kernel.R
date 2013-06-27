@@ -15,7 +15,7 @@
 #' @seealso \code{\link{build.mismatch.dictionary}}, \code{\link{kernelMatrix}}
 #' @export
 
-build.mismatch.kernel <- function (dictionary.file, seqs,
+build.features.kernels <- function (dictionary.file, seqs,
                                    kmers=NULL, kernel=TRUE){
 
   if (length (grep ('N', seqs)) > 0 )
