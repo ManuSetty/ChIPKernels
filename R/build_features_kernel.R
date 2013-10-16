@@ -8,6 +8,7 @@
 #' @param kmers Subset of kmers to build the kernel. \code{NULL} setting uses all kmers.
 #' @param kernel Boolean indicating if the kernel should be computed. If \code{FALSE}, only the feature
 #' representation is returned.
+#' @param verbose Boolean indicating if more logs should be shown
 #' @description This builds the feature matrix and kernel using the dictionary. Linear kernel is computed
 #' using \code{kernlab} package.
 #' @return List with following elements: \code{features} Sparse feature matrix (seqs X kmers)
@@ -16,7 +17,7 @@
 #' @export
 
 build.features.kernels <- function (dictionary.file, seqs,
-                                   kmers=NULL, kernel=TRUE){
+                                   kmers=NULL, kernel=FALSE, verbose=TRUE){
 
   if (length (grep ('N', seqs)) > 0 )
     stop ('Some of the sequences contain N - please remove these and re run.')
@@ -39,7 +40,8 @@ build.features.kernels <- function (dictionary.file, seqs,
   time.start <- get.time ()
   for (i in 1:(seq.len - kmer.len + 1)) {
     if (i %% block.size == 1) {
-      show (sprintf ("Position %d of %d", i, seq.len - kmer.len + 1))
+      if (verbose)
+          show (sprintf ("Position %d of %d", i, seq.len - kmer.len + 1))
       features <- features + features.iteration
       features.iteration <- sparseMatrix (length (seqs), length (kmers), x=0)
     }

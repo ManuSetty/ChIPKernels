@@ -3,7 +3,7 @@
 \title{Build features and kernels}
 \usage{
   build.features.kernels(dictionary.file, seqs,
-    kmers = NULL, kernel = TRUE)
+    kmers = NULL, kernel = FALSE, verbose = TRUE)
 }
 \arguments{
   \item{dictionary.file}{File containing the dictionary
@@ -20,6 +20,9 @@
   \item{kernel}{Boolean indicating if the kernel should be
   computed. If \code{FALSE}, only the feature
   representation is returned.}
+
+  \item{verbose}{Boolean indicating if more logs should be
+  shown}
 }
 \value{
   List with following elements: \code{features} Sparse
