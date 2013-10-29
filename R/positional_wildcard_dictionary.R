@@ -55,9 +55,9 @@ build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 	# Hamming distances
 	time.start <- get.time ()
 	show ('Determining hamming distances...')
-	dist.fwd <- hammingWithMismatches (kmers, kmers.mismatches, 0, FALSE, 3)
+	dist.fwd <- hammingWithMismatches (kmers, kmers.mismatches, 0, FALSE, no.cores)
 	show ('Determining hamming distances for reverse complements...')
-	dist.rev <- hammingWithMismatches (kmers, reverseComplement (kmers.mismatches), 0, FALSE, 3)
+	dist.rev <- hammingWithMismatches (kmers, reverseComplement (kmers.mismatches), 0, FALSE, no.cores)
 	time.end <- get.time ()
 	show (sprintf ("Time for determining distances: %.2f", (time.end - time.start) / 60))
 
