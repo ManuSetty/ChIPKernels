@@ -1,6 +1,6 @@
 export(build.features.kernels)
 export(build.mismatch.dictionary)
-export(build.pw.denegerate.dictionary)
+export(build.wildcard.dictionary)
 export(determine.kmers)
 export(dinuc.alphabet)
 export(kmer.score.in.position)

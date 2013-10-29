@@ -1,9 +1,8 @@
-\name{build.pw.denegerate.dictionary}
-\alias{build.pw.denegerate.dictionary}
-\title{Build dictionary for positional degenerate wildcard kernel}
+\name{build.wildcard.dictionary}
+\alias{build.wildcard.dictionary}
+\title{Build dictionary for wildcard kernel}
 \usage{
-  build.pw.denegerate.dictionary(kmer.len, mismatches,
-    out.dir,
+  build.wildcard.dictionary(kmer.len, mismatches, out.dir,
     alphabet = c("A", "C", "G", "T", "N", "S", "M", "R", "Y", "K", "W"),
     consecutive.mismatches = TRUE, no.cores = 1)
 }

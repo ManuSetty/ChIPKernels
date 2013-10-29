@@ -3,7 +3,7 @@
 # Manu Setty
 # 06/21/2013
 
-#' Build dictionary for positional degenerate wildcard kernel
+#' Build dictionary for wildcard kernel
 #'
 #' @param kmer.len Length of kmers
 #' @param mismatches Number of mismatches
@@ -20,7 +20,7 @@
 #' positional_wildcard_dict_kmer<\code{kmer.len}_mismatches\code{mismatches}_alpha\code{length (alphabet)}.Rdata
 #' @export
 
-build.pw.denegerate.dictionary <- function (kmer.len, mismatches, out.dir,
+build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 		alphabet = c('A', 'C', 'G', 'T', 'N', 'S', 'M', 'R', 'Y', 'K', 'W'),
 		consecutive.mismatches=TRUE, no.cores=1) {
 
@@ -82,7 +82,7 @@ build.pw.denegerate.dictionary <- function (kmer.len, mismatches, out.dir,
 		as.character (reverseComplement (DNAStringSet (colnames (pairwise.kmers)))))
 
 	# File name
-	file.name <- sprintf ("%s/positional_wildcard_dict_kmer%d_mismatches%d_alpha%d", 
+	file.name <- sprintf ("%s/wildcard_dict_kmer%d_mismatches%d_alpha%d", 
 			out.dir, kmer.len, mismatches, length (alphabet))
 	if (consecutive.mismatches)
 	    file.name <- sprintf ("%s_consecutive_mis", file.name)
