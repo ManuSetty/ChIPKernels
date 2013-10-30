@@ -3,7 +3,7 @@
 \title{Determine all kmers with mismatches of a given length}
 \usage{
   determine.kmers(alphabet, mismatches, kmer.len,
-    range = NULL, consecutive.mismatches)
+    range = NULL, consecutive.mismatches, verbose = TRUE)
 }
 \arguments{
   \item{alphabet}{Nucleotide alphabet}
@@ -13,6 +13,8 @@
   \item{range}{Range of numbers to determine kmers}
 
   \item{kmer.len}{Length of kmers}
+
+  \item{verbose}{Logical to show logs}
 }
 \value{
   A list of DNAStringSet elements: \code{kmers}

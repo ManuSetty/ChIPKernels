@@ -4,7 +4,8 @@
 \usage{
   build.wildcard.dictionary(kmer.len, mismatches, out.dir,
     alphabet = c("A", "C", "G", "T", "N", "S", "M", "R", "Y", "K", "W"),
-    consecutive.mismatches = TRUE, no.cores = 1)
+    consecutive.mismatches = TRUE, no.cores = 1,
+    verbose = TRUE)
 }
 \arguments{
   \item{kmer.len}{Length of kmers}
@@ -22,6 +23,8 @@
   only consecutive mismatches should be allowed}
 
   \item{no.cores}{Number of cores of parallel processing}
+
+  \item{verbose}{Logical to show logs}
 }
 \value{
   Creates a file containing the following elements:

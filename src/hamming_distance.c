@@ -108,8 +108,6 @@ SEXP XStringSet_dist_hamming_xy (SEXP x, SEXP y, SEXP max_nmis, SEXP fixed)
       }
     }
     
-    if (i % 10000 == 1)
-      printf ("Processed %d y sequences\n", i);
   }
 
   // Prepare return value

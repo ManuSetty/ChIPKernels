@@ -12,6 +12,7 @@
 #' Note that the first four alphabets have to be \code{c('A', 'C', 'G', 'T')}
 #' @param consecutive.mismatches Logical indicating whether only consecutive mismatches should be allowed
 #' @param no.cores Number of cores of parallel processing
+#' @param verbose Logical to show logs
 #' @description This build a matrix of distances between all kmers and unique kmers,
 #' considering reverse complements and matches to degenerate nucleotide alphabet.
 #' @return Creates a file containing the following elements: \code{pairwise.kmers} Distance matrix
@@ -22,7 +23,7 @@
 
 build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 		alphabet = c('A', 'C', 'G', 'T', 'N', 'S', 'M', 'R', 'Y', 'K', 'W'),
-		consecutive.mismatches=TRUE, no.cores=1) {
+		consecutive.mismatches=TRUE, no.cores=1, verbose=TRUE) {
 
 	start.time <- get.time ()
 	
@@ -35,7 +36,7 @@ build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 	time.start <- get.time ()
 	res.list <- mclapply (2:length (seq), mc.cores=no.cores, mc.preschedule=FALSE,
 		FUN=function (x) { determine.kmers (alphabet, mismatches, kmer.len, 
-			(seq[x-1]+1):seq[x], consecutive.mismatches)})
+			(seq[x-1]+1):seq[x], consecutive.mismatches, verbose)})
 
 	# Combine results from different cores
 	kmers <- kmers.mismatches <- DNAStringSet ()
@@ -47,22 +48,27 @@ build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 		kmers.mismatches <- c(kmers.mismatches, res.list[[i]]$kmers.mismatches)
 	}
 	time.end <- get.time ()
-	show (sprintf ("Time for finding kmers: %.2f", (time.end - time.start)/60))
+	if (verbose)
+   	    show (sprintf ("Time for finding kmers: %.2f", (time.end - time.start)/60))
 
 	# Remove redundant kmers 
 	kmers.mismatches <- remove.reverse.complements (kmers.mismatches)
 
 	# Hamming distances
 	time.start <- get.time ()
-	show ('Determining hamming distances...')
+	if (verbose)
+	    show ('Determining hamming distances...')
 	dist.fwd <- hammingWithMismatches (kmers, kmers.mismatches, 0, FALSE, no.cores)
-	show ('Determining hamming distances for reverse complements...')
+	if (verbose)
+    	show ('Determining hamming distances for reverse complements...')
 	dist.rev <- hammingWithMismatches (kmers, reverseComplement (kmers.mismatches), 0, FALSE, no.cores)
 	time.end <- get.time ()
-	show (sprintf ("Time for determining distances: %.2f", (time.end - time.start) / 60))
+	if (verbose)
+    	show (sprintf ("Time for determining distances: %.2f", (time.end - time.start) / 60))
 
 	# Build features matrix
-	show ('Creating dictionary and cleaning up...')
+	if (verbose)
+    	show ('Creating dictionary and cleaning up...')
 	pairwise.kmers <- sparseMatrix (c(dist.fwd[,1], dist.rev[,1]),
 		c(dist.fwd[,2], dist.rev[,2]), x=1, 
 		dims=c(length (kmers), length (kmers.mismatches)),
@@ -93,7 +99,7 @@ build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 	save (pairwise.kmers, kmer.column.mapping,
 		file=file.name)
 	end.time <- get.time ()
-	show (sprintf ("Total time: %.2f", (end.time - start.time)/60))
+	show (sprintf ("Total time for build dictionary: %.2f", (end.time - start.time)/60))
 }
 
 
@@ -105,13 +111,14 @@ build.wildcard.dictionary <- function (kmer.len, mismatches, out.dir,
 #' @param mismatches Number of mismatches allowed
 #' @param range Range of numbers to determine kmers
 #' @param kmer.len Length of kmers
+#' @param verbose Logical to show logs
 #' @description Builds all possible kmers in the given \code{range} for the given \code{alphabet}
 #' @return A list of DNAStringSet elements: \code{kmers} containining kmers without mismatches
 #' and \code{kmers.mismatches} containing all the kmers that were generated'
 #' @export
 
 determine.kmers <- function (alphabet, mismatches, kmer.len, 
-	range=NULL, consecutive.mismatches) {
+	range=NULL, consecutive.mismatches, verbose=TRUE) {
 	time.start <- get.time ()
 
 	# Set up range if necessary 
@@ -120,7 +127,8 @@ determine.kmers <- function (alphabet, mismatches, kmer.len,
 		range <- 0:(max-1)
 	}
 
-	show (sprintf ("Determining kmers for range: %d-%d", range[1], range[length (range)]))
+	if (verbose)
+	     show (sprintf ("Determining kmers for range: %d-%d", range[1], range[length (range)]))
 
 	# Determine matrix of numbers
 	mat <- digitsBase (range, length (alphabet), kmer.len)
@@ -165,7 +173,8 @@ determine.kmers <- function (alphabet, mismatches, kmer.len,
 	kmers <- seqs[seq.mismatches == 0]
 
 	time.end <- get.time ()
-	show (sprintf ("Time for %d-%d: %.2f", range[1], range[length (range)], (time.end - time.start)/60))
+	if (verbose)
+	    show (sprintf ("Time for %d-%d: %.2f", range[1], range[length (range)], (time.end - time.start)/60))
 
 	return (list (kmers=kmers, kmers.mismatches=kmers.mismatches))
 }
