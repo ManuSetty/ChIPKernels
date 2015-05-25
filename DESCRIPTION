@@ -1,11 +1,13 @@
 Package: ChIPKernels
 Type: Package
 Title: String kernels for ChIP-Seq
-Version: 1.0
-Date: 2013-06-21
+Version: 1.1
+Date: 2015-05-25
 Author: Manu Setty
 Maintainer: Manu Setty <manu@cbio.mskcc.org>
 Depends:
+    IRanges,
+    XVector,
     Biostrings,
     BSgenome,
     gtools,
@@ -13,8 +15,11 @@ Depends:
     sfsmisc,
     parallel,
     kernlab,
-    Matrix
+    Matrix,
+    S4Vectors
 Imports:
+    IRanges,
+    XVector,
     graphics,
     methods,
     stats,
@@ -22,8 +27,9 @@ Imports:
     BiocGenerics,
     IRanges,
     Biostrings, 
-    XVector
-LinkingTo: IRanges, Biostrings, XVector
+    XVector,
+    S4Vectors
+LinkingTo: IRanges, Biostrings, XVector, S4Vectors
 Description: Collection of methods for building different string kernels used
     for ChIP-Seq
 License: GPL (>= 2)
